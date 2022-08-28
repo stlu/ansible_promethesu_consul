@@ -78,6 +78,9 @@ Verify via browser http://localhost:9090/targets
   vars:
     consul_version: latest
     consul_iface: eth0
+    consul_node_name: consul-server
+    consul_node_role: bootstrap
+    consul_client_address: 0.0.0.0
   roles:
   - ansible-consul
 
