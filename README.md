@@ -67,7 +67,6 @@ Verify via browser http://localhost:9090/targets
 
 
 ## Create server consul (port 8500 8600/udp)
-docker run -d --privileged --name nodo2Deb11 -p 8500:8500 -p 8600:8600/udp node_debian11_ssh
 ```yaml
 ---
 - hosts: consul_instances
@@ -89,7 +88,6 @@ Verify via browser http://localhost:8500/
 
 
 ## Create a node with agent consul and prometheus node_exporter (port 9100)
-docker run -d --privileged --name nodo3Deb11 -p 9100:9100 node_debian11_ssh 
 ```yaml
 ---
 - hosts: node_exporter
