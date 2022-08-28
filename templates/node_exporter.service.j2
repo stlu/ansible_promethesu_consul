@@ -1,0 +1,17 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus Node Exporter
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Restart=always
+RestartSec=3
+Type=Simple
+ExecStart={{ prometheus_node_exporter_binary_install_dir }}/node_exporter 
+SyslogIdentifier=node_exporter
+
+[Install]
+WantedBy=multi-user.target

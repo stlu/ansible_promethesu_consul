@@ -1,0 +1,5 @@
+---
+- name: ensure node_exporter and consul is stopped
+  command: consul leave
+  notify:
+    - stop node_exporter

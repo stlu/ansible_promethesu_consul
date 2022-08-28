@@ -1,0 +1,33 @@
+---
+- include: install.yml
+  tags:
+  - never
+  - prometheus_server_configure
+  - prometheus_server_install
+
+- include: configure.yml
+  tags:
+  - never
+  - prometheus_server_configure
+
+- name: ensure prometheus service is started and enabled
+  systemd:
+    daemon_reload: true
+    name: prometheus
+    state: started
+    enabled: true
+  tags:
+  - never
+  - prometheus_server_configure
+
+- name: install node exporter
+  include: install_node.yml
+  tags:
+  - never
+  - prometheus_node_exp_install
+
+- name: decommission node exporter
+  include: remove_node.yml
+  tags:
+  - never
+  - prometheus_node_remove

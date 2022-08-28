@@ -1,0 +1,22 @@
+{{ ansible_managed | comment }}
+
+[Unit]
+Description=Prometheus
+After=network-online.target
+
+[Service]
+User=prometheus
+Group=prometheus
+Restart=always
+RestartSec=3
+Type=Simple
+ExecReload=/bin/kill -HUP $MAINPID
+ExecStart={{ prometheus_binary_install_dir }}/prometheus \
+  --storage.tsdb.path={{ prometheus_db_dir }} \
+  --storage.tsdb.retention={{ prometheus_storage_retention }} \
+  --config.file={{ prometheus_config_dir }}/prometheus.yml
+LimitNOFILE=65000
+SyslogIdentifier=prometheus
+
+[Install]
+WantedBy=multi-user.target

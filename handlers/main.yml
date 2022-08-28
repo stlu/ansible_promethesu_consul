@@ -1,0 +1,30 @@
+---
+# Handlers for prometheus and consul
+
+- name: restart prometheus
+  become: true
+  systemd:
+    daemon_reload: true
+    name: prometheus
+    state: restarted
+
+- name: reload prometheus
+  become: true
+  systemd:
+    name: prometheus
+    state: reloaded
+
+- name: restart node_exporter
+  become: true
+  systemd:
+    daemon_reload: true
+    name: node_exporter
+    state: restarted
+
+- name: stop node_exporter
+  become: true
+  systemd:
+    daemon_reload: true
+    name: node_exporter
+    state: stopped
+    enabled: false

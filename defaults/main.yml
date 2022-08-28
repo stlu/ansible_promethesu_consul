@@ -1,0 +1,13 @@
+---
+prometheus_version: 2.38.0  ## or latest
+prometheus_node_exporter_version: 1.3.1
+prometheus_skip_install: false
+prometheus_node_exporter_skip_install: false
+
+prometheus_config_dir: /etc/prometheus
+prometheus_db_dir: /var/lib/prometheus
+prometheus_binary_install_dir: '/usr/local/bin'
+prometheus_node_exporter_binary_install_dir: '/usr/local/bin'
+
+prometheus_storage_retention: '2d'
+
