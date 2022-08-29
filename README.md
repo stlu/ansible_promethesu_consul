@@ -37,7 +37,8 @@ All variables which can be overridden are stored in [defaults/main.yml](defaults
 promserver1 ansible_host=172.17.0.3
 
 [node_exporter]
-exporter1 ansible_host=172.17.0.7 consul_node_role=client
+exporter1 ansible_host=172.17.0.6
+exporter2 ansible_host=172.17.0.7
 
 # Consul Server
 [consul_instances]
@@ -45,7 +46,8 @@ consulserver1 ansible_host=172.17.0.5 consul_node_role=bootstrap consul_bind_add
 
 [consul_group_name] 
 consulserver1 ansible_host=172.17.0.5 consul_node_role=bootstrap
-exporter1 ansible_host=172.17.0.7 consul_node_role=client
+exporter1 ansible_host=172.17.0.6 consul_node_role=client
+exporter2 ansible_host=172.17.0.7 consul_node_role=client
 ```
 
 ## Create server prometheus (port 9090)
@@ -91,6 +93,7 @@ Verify via browser http://localhost:8500/
 
 
 ## Create a node with agent consul and prometheus node_exporter (port 9100)
+### Add agent consul
 ```yaml
 ---
 - hosts: node_exporter
@@ -111,7 +114,7 @@ Verify that /opt/consul/serf/local.keyring is identical on every node and in /et
 using: consul keyring -list
 Verify via shell consul members
 
-
+### Add node_exporter
 ```yaml
 ---
 # ansible-playbook   --tags=prometheus_node_exp_install
@@ -124,6 +127,20 @@ Verify via shell consul members
   - ansible_prometheus_consul
 ```
 Verify via web  localhost:9100/metrics
+
+### Reconfigure prometheus server targets
+```yaml
+---
+# ansible-playbook  --tags=prometheus_server_add_targets
+- hosts: prometheus
+  become: true
+  gather_facts: yes
+  become: yes
+
+  roles:
+  - ansible_prometheus_consul
+
+```
 
 ## Decomission the node 
 

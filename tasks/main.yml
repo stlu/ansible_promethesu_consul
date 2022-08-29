@@ -3,12 +3,12 @@
   tags:
   - never
   - prometheus_server_configure
-  - prometheus_server_install
 
 - include: configure.yml
   tags:
   - never
   - prometheus_server_configure
+  - prometheus_server_add_target
 
 - name: ensure prometheus service is started and enabled
   systemd:

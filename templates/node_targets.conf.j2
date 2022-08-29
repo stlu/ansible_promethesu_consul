@@ -1,0 +1,7 @@
+[
+{% for host in groups['node_exporter'] %}
+{% if inventory_hostname != host %}
+    { "targets": ['{{ host }}:9100'] },
+{% endif %}
+{% endfor %}
+]

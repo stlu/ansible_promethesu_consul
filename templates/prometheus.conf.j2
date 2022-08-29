@@ -19,3 +19,8 @@ scrape_configs:
       - '{{ host }}:9100'
     {% endif %}
     {% endfor %}
+  - job_name: 'dinamic_targets'
+    scrape_interval: 5s
+    file_sd_configs:
+    - files:
+      - "/etc/prometheus/file_sd/targets.json"

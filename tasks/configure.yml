@@ -11,6 +11,17 @@
   notify:
     - reload prometheus
 
+- name: Configuration targets prometheus
+  template:
+    src: "node_targets.conf.j2"
+    dest: "{{ prometheus_config_dir }}/file_sd/targets.json"
+    force: true
+    owner: root
+    group: prometheus
+    mode: 0640
+  notify:
+    - reload prometheus
+
 - name: Check if prometheus is accessible
   uri:
     url: http://{{ ansible_host }}:9090
