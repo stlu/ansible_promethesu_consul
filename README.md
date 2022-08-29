@@ -126,7 +126,7 @@ Verify via shell consul members
   roles: 
   - ansible_prometheus_consul
 ```
-Verify via web  localhost:9100/metrics
+Verify via browser http://localhost:9100/metrics
 
 ### Reconfigure prometheus server targets
 ```yaml
@@ -141,8 +141,9 @@ Verify via web  localhost:9100/metrics
   - ansible_prometheus_consul
 
 ```
+Verify via browser  http://localhost:9090/targets
 
-## Decomission the node 
+## Decomission a node 
 
 ```yaml
 ---
